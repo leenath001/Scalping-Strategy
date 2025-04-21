@@ -16,6 +16,11 @@ warnings.filterwarnings("ignore")
 
 # Boolean indicator function
 def is_pos(n):
+    n = np.round(n,2)
+    return n >= 0
+
+def is_postwo(n):
+    n = np.round(n,2)
     return n > 0
 
 def Scalping_tradingfunc(ticker):
@@ -51,9 +56,10 @@ def Scalping_tradingfunc(ticker):
             S1 = S2
             S2 = curr
             truth = is_pos(S2-S1)
+            truth2 = is_postwo(S2-S1)
 
             # position logic, update all df's within each loop
-            if P == 0 and truth == True: #buy
+            if P == 0 and truth2 == True: #buy
                 P = 1
                 contract = Stock(ticker, 'SMART', 'USD')
                 order = MarketOrder('BUY', 10)
@@ -135,7 +141,7 @@ def Scalping_tradingfunc(ticker):
         # error exception
         except Exception as e:
             print("Error:", e)
-            time.sleep(6)
+            time.sleep(5)
 
     # trading strats/summary, np -> pd dataframe construction
     beta = np.cov(valuevec,bhvec)/np.var(bhvec)

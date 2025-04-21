@@ -31,7 +31,7 @@ def Scalping_tradingfunc(ticker):
     # dataframe initialization
     actionvec = ['N']
     valuevec = [curr_pr]
-    buyholdvec = [curr_pr]
+    bhvec = [curr_pr]
     timevec = [pd.Timestamp.now(tz='US/Eastern')]
     truths = ['NA']
 

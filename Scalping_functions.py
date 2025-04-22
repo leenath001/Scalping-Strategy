@@ -88,8 +88,8 @@ def Scalping_tradingfunc(ticker):
                 actionvec = np.append(actionvec,'H')
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth)
-                print('Holding')
-                time.sleep(1)
+                print('Holding : {}'.format(curr))
+                time.sleep(2)
 
             elif P == 1 and truth == False: #sell
                 contract = Stock(ticker, 'SMART', 'USD')
@@ -144,7 +144,7 @@ def Scalping_tradingfunc(ticker):
         # error exception
         except Exception as e:
             print("Error:", e)
-            time.sleep(5)
+            time.sleep(4)
 
     # trading strats/summary, np -> pd dataframe construction
     beta = np.cov(valuevec,bhvec)/np.var(bhvec)

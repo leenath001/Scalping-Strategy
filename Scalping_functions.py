@@ -23,6 +23,8 @@ def is_postwo(n):
     n = np.round(n,2)
     return n > 0
 
+# what if we can compare directly to entry price? 
+# or if when holding, we get quicker fasters quotes
 def Scalping_tradingfunc(ticker):
 
     # data initialization
@@ -73,6 +75,7 @@ def Scalping_tradingfunc(ticker):
                 print('Buying @ {}'.format(curr))
                 time.sleep(1)
                 print("Order Status:", trade.orderStatus.status)
+                time.sleep(3)
 
             elif P == 1 and truth == True: #hold
                 if actionvec[-1] == 'B':
@@ -104,6 +107,7 @@ def Scalping_tradingfunc(ticker):
                 print('Selling @ {}'.format(curr))
                 time.sleep(1)
                 print("Order Status:", trade.orderStatus.status)
+                time.sleep(3)
 
             elif P == 0 and truth == False: # nothing
                 timevec = np.append(timevec,pd.Timestamp.now(tz='US/Eastern'))
@@ -111,10 +115,9 @@ def Scalping_tradingfunc(ticker):
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth)
                 valuevec = np.append(valuevec,valuevec[-1])
-                time.sleep(1)
                 print('No Action')
+                time.sleep(4)
 
-            time.sleep(4)
 
         # keyboard stop exception
         except KeyboardInterrupt:

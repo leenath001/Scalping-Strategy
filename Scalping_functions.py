@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import warnings
 from ib_insync import *
 import time
-import pytz 
 
 # options for displaying data
 pd.set_option('display.max_rows', None)
@@ -72,10 +71,11 @@ def Scalping_tradingfunc(ticker):
                 timevec = np.append(timevec,pd.Timestamp.now(tz='US/Eastern'))
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth)
+                print()
                 print('Buying @ {}'.format(curr))
                 time.sleep(1)
                 print("Order Status:", trade.orderStatus.status)
-                time.sleep(3)
+                time.sleep(1)
 
             elif P == 1 and truth == True: #hold
                 if actionvec[-1] == 'B':
@@ -88,6 +88,7 @@ def Scalping_tradingfunc(ticker):
                 actionvec = np.append(actionvec,'H')
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth)
+                print()
                 print('Holding : {}'.format(curr))
                 time.sleep(2)
 
@@ -104,10 +105,11 @@ def Scalping_tradingfunc(ticker):
                 actionvec = np.append(actionvec,'S')
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth) 
+                print()
                 print('Selling @ {}'.format(curr))
                 time.sleep(1)
                 print("Order Status:", trade.orderStatus.status)
-                time.sleep(3)
+                time.sleep(9)
 
             elif P == 0 and truth == False: # nothing
                 timevec = np.append(timevec,pd.Timestamp.now(tz='US/Eastern'))
@@ -115,8 +117,9 @@ def Scalping_tradingfunc(ticker):
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,truth)
                 valuevec = np.append(valuevec,valuevec[-1])
+                print()
                 print('No Action')
-                time.sleep(4)
+                time.sleep(10)
 
 
         # keyboard stop exception
@@ -134,7 +137,7 @@ def Scalping_tradingfunc(ticker):
                 elif actionvec[-1] == 'H':
                     valuevec = np.append(valuevec,valuevec[-1] * curr/newhold) 
                 timevec = np.append(timevec,pd.Timestamp.now(tz='US/Eastern'))
-                actionvec = np.append(actionvec,'N')
+                actionvec = np.append(actionvec,'S')
                 bhvec = np.append(bhvec,curr)
                 truths = np.append(truths,"T")
                 
@@ -144,7 +147,7 @@ def Scalping_tradingfunc(ticker):
         # error exception
         except Exception as e:
             print("Error:", e)
-            time.sleep(4)
+            time.sleep(10)
 
     # trading strats/summary, np -> pd dataframe construction
     beta = np.cov(valuevec,bhvec)/np.var(bhvec)

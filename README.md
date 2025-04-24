@@ -1,5 +1,5 @@
 # Scalping-Strategy
-Functions for executing scalping strategy. 
+Functions for executing scalping strategy. Yfin API will rate-limit users if too many calls, may have to run alone without other strategies calling API.
 
 Goal : Strategy aims to profit from 'up' moves while staying on the sideline for down moves. Algorithm constantly receives quotes to identify movements within short time-frames. 
 *  To run tradingfuncs, create an interactive brokers account and download IB Gateway (API must be simultaneously running alongside the function inside a terminal). 
